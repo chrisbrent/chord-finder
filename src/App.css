@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .App-logo {
@@ -36,3 +37,21 @@
     transform: rotate(360deg);
   }
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ }
+
+ li {
+  margin: 0;
+  padding-left: 2em;
+ }
+
+ .fretboard-container{
+  text-align: left;
+}
+ .fretboard{
+   background-color: darkgoldenrod;
+ }
