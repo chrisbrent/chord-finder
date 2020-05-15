@@ -14,9 +14,16 @@ function Fretboard (props) {
         5: 'E',
     }
 
-    const mapNotesToString = (rootNote) => {
-        return stringNotes(24, notes.indexOf(rootNote)).map( n => {
-            const selected = selectedNotes.indexOf(n) > -1 ? 'selected-note' : 'note';
+    const mapNotesToString = (stringRoot) => {
+        return stringNotes(24, notes.indexOf(stringRoot)).map( n => {
+            let selected = 'note';
+            const noteIndex = selectedNotes.indexOf(n);
+            if (noteIndex > -1 && noteIndex !==0) {
+                selected = 'selected-note';
+            } else if (noteIndex > -1 && noteIndex ===0) {
+                selected = 'root-note';
+            }
+
             return(
                 <Col className={selected}>
                     {n}
@@ -63,6 +70,10 @@ function Fretboard (props) {
             }
             .selected-note {
             background-color: green;
+            color: white;
+            }
+            .root-note {
+            background-color: red;
             color: white;
             }
             .string {
