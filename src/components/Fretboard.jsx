@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {notes} from '../resources/constants';
 
 function Fretboard (props) {
-    const {selectedNote} = props;
+    const {selectedNotes} = props;
 
     const strings = {
         0: 'E',
@@ -14,6 +14,17 @@ function Fretboard (props) {
         5: 'E',
     }
 
+    const mapNotesToString = (rootNote) => {
+        return stringNotes(24, notes.indexOf(rootNote)).map( n => {
+            const selected = selectedNotes.indexOf(n) > -1 ? 'selected-note' : 'note';
+            return(
+                <Col className={selected}>
+                    {n}
+                </Col>
+                );
+        })
+    }
+
     const listStrings = Object.entries(strings).reverse().map( ([key, value]) => {
         return (
         <Row>
@@ -21,14 +32,7 @@ function Fretboard (props) {
                 <Row>
                     <Col className="string">{key}</Col>
                     {
-                        stringNotes(24, notes.indexOf(value)).map( n => {
-                            const selected = `${selectedNote === n ? 'selected-note' : 'note'}`;
-                            return(
-                                <Col className={selected}>
-                                    {n}
-                                </Col>
-                                );
-                        })
+                        mapNotesToString(value)
                     }
                 </Row>
             </Col>
@@ -36,6 +40,8 @@ function Fretboard (props) {
         );
         }
     );
+
+    
 
     function stringNotes(scaleLength, startNote) {
         const result = [];
