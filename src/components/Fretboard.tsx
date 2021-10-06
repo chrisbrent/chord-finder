@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {notes} from '../resources/constants';
 
-function Fretboard (props) {
+interface IFretboardProps {
+    selectedNotes: Array<String>;
+}
+
+function Fretboard (props: IFretboardProps) {
     const {selectedNotes} = props;
 
     const strings = {
@@ -14,7 +18,7 @@ function Fretboard (props) {
         5: 'E',
     }
 
-    const mapNotesToString = (stringRoot) => {
+    const mapNotesToString = (stringRoot: string) => {
         return stringNotes(24, notes.indexOf(stringRoot)).map( n => {
             let selected = 'note';
             const noteIndex = selectedNotes.indexOf(n);
@@ -50,7 +54,7 @@ function Fretboard (props) {
 
     
 
-    function stringNotes(scaleLength, startNote) {
+    function stringNotes(scaleLength: number, startNote: number) {
         const result = [];
 
         for (let i=startNote; i < scaleLength+startNote; i++){

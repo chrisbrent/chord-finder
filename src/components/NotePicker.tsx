@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import {DropdownButton, Dropdown, Container} from 'react-bootstrap';
 import {notes} from '../resources/constants';
 
-function ScalePicker(props) {
-    const [currentScale, setCurrentScale] = useState('Pick a scale');
+interface INotePickerProps {
+    onSelectNote: Function;
+    
+}
 
-    const handleClick = (key, e) => {
-        const {onSelectScale} = props;
-        setCurrentScale(key);
-        onSelectScale(key);
+function NotePicker(props: INotePickerProps) {
+    const [currentNote, setCurrentNote] = useState('Pick a note');
+
+    const handleClick = (key: string) => {
+        const {onSelectNote} = props;
+        setCurrentNote(key);
+        onSelectNote(key);
     }
 
-    const scaleOptions = notes.map( n =>
+    const noteOptions = notes.map( n =>
             <Dropdown.Item
                 as="button"
                 eventKey={n}
@@ -24,15 +29,15 @@ function ScalePicker(props) {
         <>
             <Container>
                 <DropdownButton
-                    id="scale-dropdown-button"
-                    title={currentScale}
+                    id="note-dropdown-button"
+                    title={currentNote}
                     onSelect = {handleClick}
                 >
-                    {scaleOptions}
+                    {noteOptions}
                 </DropdownButton>
             </Container>
         </>
     );
 }
 
-export default ScalePicker;
+export default NotePicker;
